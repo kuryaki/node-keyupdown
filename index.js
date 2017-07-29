@@ -25,7 +25,7 @@ function keydownup(stream){
     lastPressed = d.getTime()
     keypressCount++
   })
-  
+
   // immediate
   function _onImmediate(){
     if(pressed == false){
@@ -40,6 +40,7 @@ function keydownup(stream){
     // skip first time
     if(keypressCount == 1){
       threshold = threshold * 2
+      return
     }
     if(interval > threshold){
       log.debug(interval)
