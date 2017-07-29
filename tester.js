@@ -1,11 +1,11 @@
 var keydownup = require("./index")
 keydownup(process.stdin)
 
-process.stdin.on('keydown', function(){
-  console.log("keydown")
+process.stdin.on('keydown', (...args) => {
+  console.log("keydown", ...args)
 })
-process.stdin.on('keyup', function(){
-  console.log("keyup")
+process.stdin.on('keyup', (...args) => {
+  console.log("keyup", ...args)
 })
 process.stdin.on('keypress', function(ch, key){
   console.log("keypress")

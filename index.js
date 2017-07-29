@@ -22,7 +22,7 @@ function keydownup(stream){
     var d = new Date()
     pressed = true
     var beforeLastPressed = lastPressed
-    lastPressed = d.getTime()
+    lastPressed = { time: d.getTime(), ch, key }
     keypressCount++
   })
 
@@ -32,7 +32,7 @@ function keydownup(stream){
       return
     }
     var current = new Date()
-    var interval = current.getTime() - lastPressed
+    var interval = current.getTime() - lastPressed.time
     if(immediateRpeat % 10000 == 0){
       log.debug(interval,keypressCount)
     }
@@ -42,10 +42,11 @@ function keydownup(stream){
       threshold = threshold * 2
       return
     }
+    var {ch, key} = lastPressed
     if(interval > threshold){
       log.debug(interval)
       pressed = false
-      stream.emit('keyup')
+      stream.emit('keyup', ch, key)
       keypressCount = 0
 
     }
